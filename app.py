@@ -10,5 +10,5 @@ bot = Bot(BOT_TOKEN, parse_mode='HTML')
 disp = Dispatcher(bot, loop=loop)
 
 if __name__ == '__main__':
-    from handlers import send_to_admin
+    from handlers import disp, send_to_admin
     executor.start_polling(disp, on_startup=send_to_admin)

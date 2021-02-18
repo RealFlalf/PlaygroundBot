@@ -1,14 +1,16 @@
 from loader import dp
-from aiogram.types import Message, ReplyKeyboardRemove
-from keyboards.default import menu
-from aiogram.dispatcher.filters import Command, Text
+from aiogram.types import Message, CallbackQuery
+from keyboards.default import main_menu
+from aiogram.dispatcher.filters import Command
+from datetime import datetime
 
 
 @dp.message_handler(Command('menu'))
 async def show_menu(message: Message):
-    await message.answer('ВЫбери что хочешь сделать', reply_markup=menu)
+    await message.answer('ВЫбери что хочешь сделать', reply_markup=main_menu)
 
 
-@dp.message_handler(Text(equals=['Время', 'Пожелание']))
-async def send_time(message: Message):
-    await message.answer(f'Время: {message.text}', reply_markup=ReplyKeyboardRemove())
+@dp.callback_query_handler(text_contains='menu_')
+async def send_time(call: CallbackQuery):
+    time = datetime.now()
+    await call.message.answer(f'Время: {time}', reply_markup=main_menu)

@@ -1,13 +1,10 @@
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-menu = ReplyKeyboardMarkup(
-    keyboard=[
-        [
-            KeyboardButton(text='Время')
-        ],
-        [
-            KeyboardButton(text='Прислать сообщене')
-        ]
-    ],
-    resize_keyboard=True
-)
+
+main_menu = InlineKeyboardMarkup()
+keys = [
+    InlineKeyboardButton(text='Время пожеланий', callback_data='menu_time_to'),
+    InlineKeyboardButton(text='Прямо сейчас', callback_data='menu_time_now')
+]
+for key in keys:
+    main_menu.add(key)
